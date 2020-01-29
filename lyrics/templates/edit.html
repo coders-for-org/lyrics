@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Insert Lyrics</h4>
+                  <p class="card-category">Complete Lyrics details</p>
+                </div>
+                <div class="card-body">
+                  <form method="get"  action="../lyrics-update/{{lyric.id}}">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+
+                          <label for="ly_nm" class="bmd-label-floating">Song</label>
+                          <input type="text" id="ly_nm" class="form-control" name="lyrics_nm" value="{{lyric.lyrics_nm}}">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="ly_gn" class="bmd-label-floating">Genre</label>
+                          <input type="text" id="ly_gn" class="form-control" name="genre" value="{{lyric.genre}}">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="ly_sn" class="bmd-label-floating">Singer</label>
+                          <input id="ly_sn" type="text" class="form-control" name="singer" value="{{lyric.singer}}">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="ly_dt" class="bmd-label-floating">Date</label>
+                          <input id="ly_dt" type="text" class="form-control" name="date" value="{{lyric.date}}">
+                        </div>
+                      </div>
+                      <div class="col-md-6"> 
+                        <div class="form-group">
+                          <label for="ly_no" class="bmd-label-floating">Number</label>
+                          <input id="ly_no" type="text" class="form-control" name="nos" value="{{lyric.nos}}">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="ly_mt" class="bmd-label-floating">Music</label>
+                          <input id="ly_mt" type="text" class="form-control" name="music_type" value="{{lyric.music_type}}">
+                        </div>
+                      </div>
+                    </div>   
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label for="ly_ly" class="bmd-label-floating">Lyrics</label>
+                            <input id="ly_ly" type="text" class="form-control" name="lyrics" value="{{lyric.lyrics}}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit"  class="btn btn-primary pull-right">Update</button>
+                    <button type="submit" action="../lyrics-show/" class="btn btn-primary pull-right">Back</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      {% endblock content %}

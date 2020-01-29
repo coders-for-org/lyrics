@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Insert Lyrics</h4>
+                  <p class="card-category">Complete Lyrics details</p>
+                </div>
+                <div class="card-body">
+                  <form method="get" action="/lyrics-insert/">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+
+                          <label for="ly_nm" class="bmd-label-floating">Song</label>
+                          <input type="text" id="ly_nm" class="form-control" name="lyrics_nm">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="ly_gn" class="bmd-label-floating">Genre</label>
+                          <input type="text" id="ly_gn" class="form-control" name="genre">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="ly_sn" class="bmd-label-floating">Singer</label>
+                          <input id="ly_sn" type="text" class="form-control" name="singer">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="ly_dt" class="bmd-label-floating">Date</label>
+                          <input id="ly_dt" type="text" class="form-control" name="date">
+                        </div>
+                      </div>
+                      <div class="col-md-6"> 
+                        <div class="form-group">
+                          <label for="ly_no" class="bmd-label-floating">Number</label>
+                          <input id="ly_no" type="text" class="form-control" name="nos">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="ly_mt" class="bmd-label-floating">Music</label>
+                          <input id="ly_mt" type="text" class="form-control" name="music_type">
+                        </div>
+                      </div>
+                    </div>   
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label for="ly_ly" class="bmd-label-floating">Lyrics</label>
+                            <textarea id="ly_ly" class="form-control" rows="5" name="lyrics"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="../static/img/faces/marc.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-category text-gray">Demo Admin</h6>
+                  <h4 class="card-title">Company name</h4>
+                  <p class="card-description">
+                    Don't be scared of the truth because we need to restart the
+                     human foundation in truth And I love you like Kanye 
+                    loves Kanye I love Rick Owens’ bed design but the back is.
+                  </p>
+                  <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endblock content %}

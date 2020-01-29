@@ -1,0 +1,35 @@
+{% load static %}
+<div class="sidebar" data-color="purple" data-background-color="white" data-image="{% static 'img/sidebar-1.jpg' %}">
+    <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+  
+        Tip 2: you can also add an image using data-image tag
+    -->
+    <div class="logo">
+        <a href="/" class="simple-text logo-normal">
+            Lyrics Admin
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="/lyrics-admin/">
+                    <i class="material-icons">dashboard</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lyrics-insert/">
+                    <i class="material-icons">create</i>
+                    <p>Insert Lyrics</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/lyrics-show/">
+                    <i class="material-icons">queue_music</i>
+                    <p>Lyrics List</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

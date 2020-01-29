@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Simple Table</h4>
+                  <p class="card-category"> Here is a subtitle for this table</p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>Song</th>
+                        <th>Genre</th>
+                        <th>Singer</th>
+                        <th>Date</th>
+                        <th>Number</th>
+                        <th>Music</th>
+                        <th>Action</th>
+
+                      </thead>
+                      <tbody>
+                        {% for ly in lyrics %}
+                        <tr>
+                          <td>{{ ly.lyrics_nm }}</td>
+                          <td>{{ ly.genre }}</td>
+                          <td>{{ ly.singer }}</td>
+                          <td>{{ ly.date }}</td>
+                          <td>{{ ly.nos }}</td>
+                          <td>{{ ly.music_type }}</td>
+                          <td><a href="/lyrics-edit/{{ly.id}}">Edit</a> 
+                              <a href="/lyrics-view/{{ly.id}}">View</a>
+                              <a href="/lyrics-del/{{ly.id}}">Delete</a>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+  {% endblock content %}
+      
