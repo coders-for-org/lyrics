@@ -3,6 +3,9 @@
 {% load static %}
       <div class="content">
         <div class="container-fluid">
+          {% if msg %}
+          <div class="text-light p-3 my-4 col-8 rounded" style="background-color: #8e24aa;">{{ msg }}</div>
+          {% endif %}
           <div class="row">
             <div class="col-md-8">
               <div class="card">
@@ -11,7 +14,8 @@
                   <p class="card-category">Complete Lyrics details</p>
                 </div>
                 <div class="card-body">
-                  <form method="get" action="/lyrics-insert/">
+                  <form method="post" action="/lyrics-insert/" enctype="multipart/form-data">
+                  {% csrf_token %}
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
@@ -65,6 +69,9 @@
                         </div>
                       </div>
                     </div>
+                    {% comment %} images banner {% endcomment %}
+                    <div><input type="file" name="lyrics_banner" id=""></div>
+                    {% comment %} end images banner {% endcomment %}
                     <button type="submit" class="btn btn-primary pull-right">Submit</button>
                     <div class="clearfix"></div>
                   </form>

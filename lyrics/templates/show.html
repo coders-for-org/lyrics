@@ -1,48 +1,128 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Simple Table</h4>
-                  <p class="card-category"> Here is a subtitle for this table</p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>Song</th>
-                        <th>Genre</th>
-                        <th>Singer</th>
-                        <th>Date</th>
-                        <th>Number</th>
-                        <th>Music</th>
-                        <th>Action</th>
-
-                      </thead>
-                      <tbody>
-                        {% for ly in lyrics %}
-                        <tr>
-                          <td>{{ ly.lyrics_nm }}</td>
-                          <td>{{ ly.genre }}</td>
-                          <td>{{ ly.singer }}</td>
-                          <td>{{ ly.date }}</td>
-                          <td>{{ ly.nos }}</td>
-                          <td>{{ ly.music_type }}</td>
-                          <td><a href="/lyrics-edit/{{ly.id}}">Edit</a> 
-                              <a href="/lyrics-view/{{ly.id}}">View</a>
-                              <a href="/lyrics-del/{{ly.id}}">Delete</a>
-                          </td>
-                        </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+<div class="content"> 
+  <div class="container-fluid">
+    <div class="row">
+      {% if messages %}
+          <div class="container messages">
+              {% for msg in messages %}
+                  <div class="alert alert-success " role="alert">
+                      <span class="badge badge-pill badge-success mr-3">{{msg.message}}</span> 
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div> 
+              {% endfor %}
+          </div>
+      {% endif %}
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Lyrics List {{sess}}</h4>
+            <p class="card-category"> Here is a subtitle for this table</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Live</th>
+                  <th>Song</th>
+                  <th>Genre</th>
+                  <th>Singer</th>
+                  <th>Date</th>
+                  <th>Number</th>
+                  <th>Music</th>
+                  <th>Action</th>
+                </thead>
+                <tbody>
+                  {% for ly in lyrics %}
+                  {% if ly.is_live == 1 %}
+                      <tr style="background-color: #caffe2">
+                  {% elif ly.is_live == 0 %}
+                  <tr style="background-color: #fac0c4;">
+                  {% else %}
+                    <tr style="background-color: #f0f0f0;">
+                  {% endif %}
+                    <td>
+                       <button class="btn btn-link btn-dark p-0" data-target="#modal_for_live_{{ly.id}}"
+                        data-toggle="modal"><i class="fa fa-square"></i></button>
+                    </td>
+                    <td>{{ ly.lyrics_nm }}</td>
+                    <td>{{ ly.genre }}</td>
+                    <td>{{ ly.singer }}</td>
+                    <td>{{ ly.date }}</td>
+                    <td>{{ ly.nos }}</td>
+                    <td>{{ ly.music_type }}</td>
+                    <td><a href="/lyrics-view/{{ly.id}}"><i class="fa fa-eye text-success"></i></a> &nbsp; &nbsp;
+                      <a href="/lyrics-edit/{{ly.id}}"><i class="fa fa-pencil text-primary"></i></a> &nbsp;&nbsp;
+                      
+                      <button class="btn btn-link btn-danger p-0" data-target="#modal_for_del_{{ly.id}}"
+                        data-toggle="modal"><i class="fa fa-trash"></i></button>
+                    </td>
+                    
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
-  {% endblock content %}
-      
+          </div>
+        </div>
+      </div>
+      {% for ly in lyrics %}
+
+      <!-- Modal For Delete -->
+      <div class="modal fade" id="modal_for_del_{{ly.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Delete Lyrics Record</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              Are You Sure To Delete the Lyrics Name: <strong><u>{{ ly.lyrics_nm }}</u></strong>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+              <a href="/lyrics-del/{{ly.id}}" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal For Live Or Not -->
+      <div class="modal fade" id="modal_for_live_{{ly.id}}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Check The Status of Lyrics</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              Do you want to live the Lyrics of <strong><u>{{ ly.lyrics_nm }}</u></strong> Song ?<br>
+            <form action="/lyrics-is-live/" method="post">
+            {% csrf_token %}
+              <input type="hidden" name="id" value="{{ ly.id }}">
+              <input type="radio" class="form-control" name="is_live" value="True" id="live_true">
+              <label for="live_true">Live</label><br>
+              <input type="radio" class="form-control" name="is_live" value="False" id="live_false">
+              <label for="live_false">Hold</label>
+            </div>
+            <!-- <a href="/lyrics-is-live/{{ly.id}}" value="True" name="live_data" class="btn btn-primary">YES</a>
+            <a href="/lyrics-is-live/{{ly.id}}" value="False" class="btn btn-primary">NO</a> -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endblock content %}

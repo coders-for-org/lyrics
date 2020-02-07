@@ -4,6 +4,7 @@ from lyrics.forms import Lyrics_form
 from . import views
 
 urlpatterns = [
+    path('tunetheworld/', views.login_admin),
     path('lyrics-admin/', views.lyrics_dashboard),
     path('lyrics-insert/', views.lyrics_insert),
     path('lyrics-show/', views.lyrics_show),
@@ -11,6 +12,10 @@ urlpatterns = [
     path('lyrics-del/<int:id>', views.lyrics_delete),
     path('lyrics-update/<int:id>', views.lyrics_update),
     path('lyrics-view/<int:id>', views.lyrics_view),
+    path('tunetheworld-logout/', views.logout),
+    path('lyrics-is-live/', views.lyrics_is_live),    
+
 ]
+
 
 

@@ -26,16 +26,25 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+     .outcol{
+       transition: all ease-in-out 3s;
+     }
+     .outcol:hover{
+       filter: saturate(0);
+       background-size: 450px 300px;
+     }
+    </style>
   </head>
   <body>
 
-	  {% include "nav.html" %}
+	  {% include "live-nav.html" %}
 
     {% block content_live %} {% endblock content_live %}
     
-    {% include "footer.html" %}
+    {% include "live-footer.html" %}
      
-    {% include "asset.html" %}
+    {% include "live-asset.html" %}
    
   </body>
   </html>

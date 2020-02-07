@@ -12,7 +12,8 @@
                   <p class="card-category">Complete Lyrics details</p>
                 </div>
                 <div class="card-body">
-                  <form method="get"  action="../lyrics-update/{{lyric.id}}">
+                  <form method="post"  action="../lyrics-update/{{lyric.id}}"  enctype="multipart/form-data">
+                  {% csrf_token %}
                     <div class="row">
                       <div class="col-md-5">
                         <div class="form-group">
@@ -43,7 +44,7 @@
                       </div>
                       <div class="col-md-6"> 
                         <div class="form-group">
-                          <label for="ly_no" class="bmd-label-floating">Number</label>
+                          <label for="ly_no" class="bmd-label-floating">Ratings</label>
                           <input id="ly_no" type="text" class="form-control" name="nos" value="{{lyric.nos}}">
                         </div>
                       </div>
@@ -64,6 +65,26 @@
                             <input id="ly_ly" type="text" class="form-control" name="lyrics" value="{{lyric.lyrics}}">
                           </div>
                         </div>
+                      </div>
+                    </div>
+                     <div class="row">
+                      {% comment %} <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label for="ly_b" class="bmd-label-floating">Banner</label>
+                            <img class="img-fluid w-100" src="/media/{{lyric.lyrics_banner}}" />
+                            <input for="ly_b" type="file" class="form-control" name="lyrics_banner" value="{{lyric.lyrics_banner}}" >
+                            <input type="file" name="lyric.lyrics_banner" id="">
+                            <div><input type="file" name="lyrics_banner" id=""></div>
+                          </div>
+                        </div>
+                      </div> {% endcomment %}
+                      <div class="col-md-4">
+                        <img class="img-fluid w-100" src="/media/{{ lyric.lyrics_banner }}">
+                      </div>
+                      <div class="col-md-8">
+                        <label for="ly_b" class="bmd-label-floating">Banner</label>
+                        <input type="file" class="d-block" id="ly_b" name="lyrics_banner" value="{{lyric.lyrics_banner}}">
                       </div>
                     </div>
                     <button type="submit"  class="btn btn-primary pull-right">Update</button>

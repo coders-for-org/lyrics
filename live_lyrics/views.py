@@ -9,3 +9,7 @@ def index(request):
 def live_list(request):
     all_data = Lyrics_mod.objects.all().order_by('-id')
     return render(request, 'live_list.html', {'lyrics': all_data})
+
+def live_view(request, id):
+    lyr = Lyrics_mod.objects.get(id=id)
+    return render(request, 'live_view.html', {'lyrics': lyr}) 

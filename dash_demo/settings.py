@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'dash_demo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lyrics_db',
+        'NAME': 'dashdemo_db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -130,3 +131,6 @@ STATICFILES_DIRS = [
      os.path.join(BASE_DIR, 'live_lyrics/static'),
      os.path.join(BASE_DIR, 'lyrics/static'),
  ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
